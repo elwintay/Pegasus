@@ -1,0 +1,21 @@
+version: '3'
+
+
+services:
+  pegasus: #this is the name
+    build: ./Pegasus #this is the folder to build
+    stdin_open: true
+    tty: true
+    ports:
+      - 8888:8888 #jupyter
+      - 6006:6006 #tensorboard
+    command: "/bin/bash"
+    environment: 
+      NVIDIA_VISIBLE_DEVICES: 0
+      CUDA_VISIBLE_DEVICES: 0
+    ulimits:
+      memlock: -1
+    shm_size: '16gb'
+    volumes:
+      - ./Pegasus:/Pegasus
+    ipc: "host"
